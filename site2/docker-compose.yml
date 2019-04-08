@@ -1,0 +1,19 @@
+version: '2'
+services:
+  nginx:
+    image: nginx:latest
+    container_name: "site2"
+    volumes:
+      - ./public:/usr/share/nginx/html
+      - ./default.conf:/etc/nginx/conf.d/default.conf 
+    environment:
+      VIRTUAL_HOST: site2.example.com
+      LETSENCRYPT_HOST: site2.example.com
+      LETSENCRYPT_EMAIL: example@mail.com
+    restart: always
+    networks:
+      - common_link
+
+networks:
+  common_link:
+    external: true
